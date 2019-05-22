@@ -54,7 +54,34 @@ export class AuctionShowPage extends Component {
 
     return (
         <main className="Page">
-                <AuctionDetails {...this.state.auction} />
+         <>
+        <div className="auction-show">
+        
+            <div className="leftside">
+                <h2>{this.state.auction.title}</h2>
+                <p>
+                {this.state.auction.description}
+                </p>
+                <BidForm
+                onSubmit={params => this.createBid(params)}
+                />
+                <h2>Previous Bids</h2>
+                <BidList
+                bids={this.state.auction.bids}
+                />
+            </div>
+
+            <div className="rightside">
+               <h3>Current Price:</h3>
+                <h3>
+                Ends at:
+                {this.state.auction.end_date}
+                </h3>
+            </div>
+            
+         </div>
+        
+         </>
          </main>
     );
   }

@@ -10,19 +10,7 @@ function BidDetails(props) {
   return (
     <div>
       <p>
-        {props.price}
-        <br />
-        {/* 
-          Using the "style" prop on a base HTML component
-          will modify in the style attribute (inline styles.)
-        */}
-        <small
-          style={{
-            color: "red",
-            fontStyle: "italic"
-          }}
-        >
-        </small>
+        ${props.price}
         <br />
         <small>Bidded {props.created_at}</small>
       </p>

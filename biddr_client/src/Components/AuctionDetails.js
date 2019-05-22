@@ -23,11 +23,11 @@ export function AuctionDetails(props) {
             </div>
 
             <div className="rightside">
-               <p>Current Price:</p>
-                <p>
+               <h3>Current Price:</h3>
+                <h3>
                 Ends at:
                 {props.end_date}
-                </p>
+                </h3>
             </div>
             
          </div>
