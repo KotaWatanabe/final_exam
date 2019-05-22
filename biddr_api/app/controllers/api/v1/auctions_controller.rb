@@ -1,8 +1,8 @@
 class Api::V1::AuctionsController < Api::ApplicationController
-    # before_action :authenticate_user!, only: [ :create ]
+    before_action :authenticate_user!, only: [ :create ]
     before_action :find_auction, only: [ :show ]
     def index
-        Auctions = Auction.order(created_at: :desc)
+        auctions = Auction.order(created_at: :desc)
     
         render(
           json: auctions,
@@ -18,7 +18,7 @@ class Api::V1::AuctionsController < Api::ApplicationController
     end
 
     def create
-        Auction = Auction.new auction_params
+        auction = Auction.new auction_params
         auction.user = current_user
     
         auction.save!

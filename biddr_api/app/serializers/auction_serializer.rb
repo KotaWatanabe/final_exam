@@ -1,5 +1,5 @@
 class AuctionSerializer < ActiveModel::Serializer
-  attributes (
+  attributes(
     :id,
     :title,
     :description,
