@@ -15,6 +15,7 @@ class Api::V1::AuctionsController < Api::ApplicationController
           json: @auction,
           include: [ :seller, {bids: [ :buyer ]} ]
         )
+        @current_price = Bid.last.price
     end
 
     def create

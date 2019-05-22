@@ -13,22 +13,9 @@ export class AuctionShowPage extends Component {
     super(props);
 
     this.state = {
-      Auction: null,
-      Bid:null
+      auction: null,
+      bids:[]
     };
-  }
-
-  componentDidMount() {
-    const id = this.props.match.params.id;
-
-    Auction.one(id).then(auction => {
-      this.setState({
-        auction
-      });
-      this.setState({
-        Bid: auction.bids
-      });
-    });
   }
 
   createBid(params) {
@@ -42,6 +29,18 @@ export class AuctionShowPage extends Component {
       }
     });
   }
+
+  componentDidMount() {
+    const id = this.props.match.params.id;
+
+    Auction.one(id).then(auction => {
+      this.setState({
+        auction,
+        bids: auction.bids
+      });
+    });
+  }
+
 
   render() {
     if (!this.state.auction) {
@@ -67,7 +66,8 @@ export class AuctionShowPage extends Component {
                 />
                 <h2>Previous Bids</h2>
                 <BidList
-                bids={this.state.auction.bids}
+                // bids={this.state.auction.bids}
+                bids={this.state.bids}
                 />
             </div>
 
