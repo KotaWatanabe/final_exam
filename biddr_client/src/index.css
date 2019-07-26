@@ -14,13 +14,16 @@ code {
 
 .auction-show{
   display:flex;
+  text-align: center;
 }
 .leftside{
   flex:1;
+  justify-content: flex-end;
 }
 .rightside{
   flex:1;
-}
+  justify-content: flex-start;
+} 
 
 .NavBar {
   width: 100%;

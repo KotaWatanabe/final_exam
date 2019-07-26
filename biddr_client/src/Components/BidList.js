@@ -12,15 +12,6 @@ export function BidList(props) {
         }}>
             {bids.map(bid =>(
                 <li key={bid.id}>
-                {/* <AnswerDetails
-                body={answer.body}
-                author={answer.author}
-                created_at={answer.created_at}
-                /> */}
-                {/*
-                In JSX, you can use the spread operator
-                to pass properties of an object as props to the React element
-                */}
                 <BidDetails {...bid} />
             </li>
               ))}

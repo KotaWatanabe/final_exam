@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { BidList } from "./BidList";
 import { AuctionDetails } from "./AuctionDetails";
 import { Auction } from "../api/auction";
 import { Bid } from "../api/bid";
 import { BidForm } from "./BidForm";
+import { BidList } from "./BidList";
+
 // import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 
 export class AuctionShowPage extends Component {
@@ -12,18 +13,9 @@ export class AuctionShowPage extends Component {
     super(props);
 
     this.state = {
-      Auction: null
+      auction: null,
+      bids:[]
     };
-  }
-
-  componentDidMount() {
-    const id = this.props.match.params.id;
-
-    Auction.one(id).then(auction => {
-      this.setState({
-        auction
-      });
-    });
   }
 
   createBid(params) {
@@ -38,6 +30,18 @@ export class AuctionShowPage extends Component {
     });
   }
 
+  componentDidMount() {
+    const id = this.props.match.params.id;
+
+    Auction.one(id).then(auction => {
+      this.setState({
+        auction,
+        bids: auction.bids
+      });
+    });
+  }
+
+
   render() {
     if (!this.state.auction) {
       return (
@@ -48,23 +52,37 @@ export class AuctionShowPage extends Component {
     }
 
     return (
-        <>
         <main className="Page">
-            <div className="auction-show">
-              <div className="leftside">
-                <AuctionDetails {...this.state.auction} />
+         <>
+        <div className="auction-show">
+        
+            <div className="leftside">
+                <h2>{this.state.auction.title}</h2>
+                <p>
+                {this.state.auction.description}
+                </p>
                 <BidForm
                 onSubmit={params => this.createBid(params)}
-              />
+                />
                 <h2>Previous Bids</h2>
                 <BidList
-                bids={this.state.auction.bids}
+                // bids={this.state.auction.bids}
+                bids={this.state.bids}
                 />
-              </div>
-
             </div>
+
+            <div className="rightside">
+               <h3>Current Price:</h3>
+                <h3>
+                Ends at:
+                {this.state.auction.end_date}
+                </h3>
+            </div>
+            
+         </div>
+        
+         </>
          </main>
-      </>
     );
   }
 }
